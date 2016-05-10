@@ -20,15 +20,15 @@ RSpec.describe "GET /api/v1/ideas" do
     expect(parsed_response.count).to eq(3)
 
     expect(parsed_response[0]).to eq({
-      "id"         => customer1.id,
-      "title" => customer1.title,
-      "body" => customer1.body,
-      "quality" => customer1.quality,
-      "created_at" => format_date(customer1.created_at),
-      "updated_at" => format_date(customer1.updated_at)
+      "id"         => idea1.id,
+      "title" => idea1.title,
+      "body" => idea1.body,
+      "quality" => idea1.quality,
+      "created_at" => format_date(idea1.created_at),
+      "updated_at" => format_date(idea1.updated_at)
     })
 
-    expect(parsed_response[1]["title"]).to eq(customer2.title)
-    expect(parsed_response[2]["title"]).to eq(customer3.title)
+    expect(parsed_response[1]["title"]).to eq(idea2.title)
+    expect(parsed_response[2]["title"]).to eq(idea3.title)
   end
 end
