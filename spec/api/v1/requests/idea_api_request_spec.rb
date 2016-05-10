@@ -77,23 +77,23 @@ RSpec.describe "GET /api/v1/ideas" do
   it "creates a new idea" do
     # id,title,body,quality,created_at,updated_at
     idea1 = create(:idea, title: "Test idea 1", body: "Text for number 1 idea")
-    new_idea = {
+    new_idea = {idea: {
       title: "New Idea",
       body: "New body",
-      quality: "great",
+      quality: "great",}
     }
 
     get "/api/v1/ideas/new", new_idea
 
-    expect(parsed_response["title"]).to eq(new_idea[:title])
+    expect(parsed_response["title"]).to eq(new_idea[:idea][:title])
   end
 
   it "updates an existing idea" do
     # id,title,body,quality,created_at,updated_at
     idea1 = create(:idea, title: "Test idea 1", body: "Text for number 1 idea")
-    edited_idea = {
+    edited_idea = {idea: {
       title: "Edited Idea",
-      body: "Edited body",
+      body: "Edited body",}
     }
 
     put "/api/v1/ideas/#{idea1.id}", edited_idea

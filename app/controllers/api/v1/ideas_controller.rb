@@ -1,6 +1,4 @@
-class Api::V1::IdeasController < ApplicationController
-  protect_from_forgery with: :null_session
-
+class Api::V1::IdeasController < ApiController
   respond_to :json
 
   def index
@@ -15,12 +13,16 @@ class Api::V1::IdeasController < ApplicationController
     respond_with Idea.create(idea_params)
   end
 
+  def create
+    respond_with Idea.create!(idea_params), location: nil
+  end
+
   def update
     respond_with Idea.update(params[:id], idea_params), location: nil
   end
 
   private
     def idea_params
-      params.permit(:title, :body, :quality)
+      params.require(:idea).permit(:title, :body, :quality)
     end
 end
