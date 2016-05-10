@@ -6,4 +6,12 @@ class Api::V1::IdeasController < ApplicationController
   def index
     respond_with Idea.all
   end
+
+  def show
+    respond_with Idea.find(params[:id])
+  end
+
+  def new
+
+  end
 end
