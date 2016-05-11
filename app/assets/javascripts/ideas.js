@@ -1,10 +1,9 @@
 $(document).ready(function(){
   window.onload = fetchIdeas
   $("#create-idea").on("click", createIdea);
+  $('body').on("click", "input#delete-idea", deleteIdea)
+  $('body').on("click", "input#edit-idea", editIdea)
 })
-
-$("#delete-idea").on("click", deleteIdea);
-$("#edit-idea").on("click", editIdea);
 
 function fetchIdeas(event) {
   $.ajax({
@@ -20,7 +19,6 @@ function fetchIdeas(event) {
 
 function createIdea() {
   var ideaParams = {idea: {title: $("#idea-title").val(), body: $("#idea-body").val()}}
-  // var ideaParams = {idea: {title: $("#idea-title")}.val(), body: $("#idea-body").val()}}
   $.ajax({
     url: "api/v1/ideas",
     method: "POST",
@@ -34,9 +32,9 @@ function createIdea() {
 }
 
 function prependIdea(idea) {
-  event.preventDefault();
+  // event.preventDefault();
   $(".whole-idea").prepend(
-    "<div class='idea' data-idea-id="
+    "<div contentEditable='true' class='idea' data-idea-id="
     + idea.id
     + "><hr><h3>Title: "
     + idea.title
@@ -49,14 +47,12 @@ function prependIdea(idea) {
     + "<input type='button' value='Edit Idea' class='btn btn-primary' id='edit-idea'>"
     + "</div>"
   )
-  $("#delete-idea").on("click", deleteIdea);
-  $("#edit-idea").on("click", editIdea);
 }
 
 function showIdeas(results) {
   results.forEach(function(idea){
     $(".whole-idea").prepend(
-      "<div class='idea' data-idea-id="
+      "<div contentEditable='true' class='idea' data-idea-id="
       + idea.id
       + "><hr><h3>Title: "
       + idea.title
@@ -69,16 +65,15 @@ function showIdeas(results) {
       + "<input type='button' value='Edit Idea' class='btn btn-primary' id='edit-idea'>"
       + "</div>"
     )
-    $("#delete-idea").on("click", deleteIdea);
-    $("#edit-idea").on("click", editIdea);
   })
 }
 
 function editIdea(){
   event.preventDefault();
+  var ideaId = this.parentElement.getAttribute("data-idea-id")
   var ideaParams = {idea: {title: $("#idea-title").val(), body: $("#idea-body").val()}}
   $.ajax({
-    url: "api/v1/ideas" + idea.id,
+    url: "api/v1/ideas/" + ideaId,
     method: "PUT",
     dataType: "json",
     data: ideaParams,
@@ -103,14 +98,6 @@ function deleteIdea(){
     }
   })
 };
-
-// photographs.forEach(function(simplePhoto) {
-//   var image = document.createElement('img');
-//   image.alt = simplePhoto.caption;
-//   image.src = simplePhoto.url;
-//   image.className = "instagram-image";
-//   document.getElementById('photographs').appendChild(image)
-// });
 
 
 
