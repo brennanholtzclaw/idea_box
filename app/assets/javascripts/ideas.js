@@ -102,7 +102,7 @@ function editBody(){
     method: "PUT",
     dataType: "json",
     data: ideaParams,
-    success: fetchIdeas,
+    // success: fetchIdeas,
     error: function(){
       alert("Something went wrong")
     }
@@ -118,7 +118,7 @@ function editTitle(){
     method: "PUT",
     dataType: "json",
     data: ideaParams,
-    success: fetchIdeas,
+    // success: fetchIdeas,
     error: function(){
       alert("Something went wrong")
     }
