@@ -11641,7 +11641,9 @@ function prependIdea(idea) {
   $(".whole-idea").prepend(
     "<div class='idea' data-idea-id="
     + idea.id
-    + "><hr><h3 class='displayed-idea-title idea' id='idea-title-"
+    + " data-quality='"
+    + idea.quality
+    + "'><hr><h3 class='displayed-idea-title idea' id='idea-title-"
     + idea.id
     + "' contentEditable='true'>"
     + idea.title
