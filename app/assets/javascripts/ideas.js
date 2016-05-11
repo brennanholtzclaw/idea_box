@@ -78,6 +78,7 @@ function prependIdea(idea) {
 }
 
 function showIdeas(results) {
+  $(".whole-idea").html("")
   results.forEach(function(idea){
     $(".whole-idea").prepend(
       "<div class='idea' data-idea-id="
