@@ -3,8 +3,16 @@ $(document).ready(function(){
   $("#create-idea").on("click", createIdea);
   $("#idea_filter_name").on("keyup", filterIdeas)
   $('body').on("click", "input#delete-idea", deleteIdea);
+  $('body').on("click", "input#thumbs-up", thumbsUp);
+  $('body').on("click", "input#thumbs-down", thumbsDown);
   $('body').on("blur", "h3.displayed-idea-title", editTitle);
   $('body').on("blur", "p.displayed-idea-body", editBody);
+  // $('body').keydown("h3.displayed-idea-title", function(e) {
+  //   if (e.keyCode === 13) {
+  //     return false
+  //     editTitle
+  //   }
+  // });
 })
 
 function filterIdeas() {
@@ -43,6 +51,8 @@ function createIdea() {
       alert("Something went wrong")
     }
   })
+  $("#idea-title").val("")
+  $("#idea-body").val("")
 }
 
 function prependIdea(idea) {
@@ -61,6 +71,8 @@ function prependIdea(idea) {
     + idea.quality
     + "</h4>"
     + "<input type='button' value='Delete Idea' class='btn btn-danger' id='delete-idea'>  "
+    + "<input type='button' value='Thumbs Up' class='btn btn-success' id='thumbs-up'>  "
+    + "<input type='button' value='Thumbs Down' class='btn btn-warning' id='thumbs-down'>  "
     + "</div>"
   )
 }
@@ -82,10 +94,44 @@ function showIdeas(results) {
       + idea.quality
       + "</h4>"
       + "<input type='button' value='Delete Idea' class='btn btn-danger' id='delete-idea'>  "
+      + "<input type='button' value='Thumbs Up' class='btn btn-success' id='thumbs-up'>  "
+      + "<input type='button' value='Thumbs Down' class='btn btn-warning' id='thumbs-down'>  "
       + "</div>"
     )
   })
 }
+
+function thumbsUp() {
+  event.preventDefault();
+  var ideaId = this.parentElement.getAttribute("data-idea-id")
+  var ideaParams = {idea: {quality: "1"}}
+// debugger;
+  $.ajax({
+    url: "api/v1/ideas/" + ideaId,
+    method: "PUT",
+    dataType: "json",
+    data: ideaParams,
+    error: function(){
+      alert("Something went wrong")
+    }
+  })
+};
+
+function thumbsDown() {
+  event.preventDefault();
+  var ideaId = this.parentElement.getAttribute("data-idea-id")
+  var ideaParams = {idea: {quality: "-1"}}
+// debugger;
+  $.ajax({
+    url: "api/v1/ideas/" + ideaId,
+    method: "PUT",
+    dataType: "json",
+    data: ideaParams,
+    error: function(){
+      alert("Something went wrong")
+    }
+  })
+};
 
 function editBody(){
   event.preventDefault();
