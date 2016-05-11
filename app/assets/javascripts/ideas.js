@@ -15,20 +15,6 @@ function fetchIdeas(event) {
   })
 }
 
-function showIdeas(results) {
-  results.forEach(function(idea){
-    $(".idea-quality").append(
-      idea.quality
-    ),
-    $(".idea-title").append(
-      idea.title
-    ),
-    $(".idea-body").append(
-      idea.body
-    )
-  })
-}
-
 function createIdea() {
   var ideaParams = {idea: {title: $("#idea-title").val(), body: $("#idea-body").val()}}
   // var ideaParams = {idea: {title: $("#idea-title")}.val(), body: $("#idea-body").val()}}
@@ -37,16 +23,32 @@ function createIdea() {
     method: "POST",
     dataType: "json",
     data: ideaParams,
-    success: fetchIdeas,
+    success: prependIdea,
     error: function(){
       alert("Something went wrong")
     }
   })
 }
 
-function editIdea(){
-  var ideaParams = {idea: {title: $("#idea-title").val(), body: $("#idea-body").val()}}
+function prependIdea(idea) {
+  event.preventDefault();
+  $(".whole-idea").prepend(
+    "<div class='idea' data-idea-id="
+    + idea.id
+    + "><h3>Title:"
+    + idea.title
+    + "</h3><p>"
+    + idea.body
+    + "</p><h4>"
+    + idea.quality
+    + "</h4>"
+    + "</div>"
+  )
+}
 
+function editIdea(){
+  event.preventDefault();
+  var ideaParams = {idea: {title: $("#idea-title").val(), body: $("#idea-body").val()}}
   $.ajax({
     url: "api/v1/ideas",
     method: "PUT",
@@ -59,21 +61,19 @@ function editIdea(){
   })
 }
 
-// function createPost(){
-//   var postParams = {post: {description: $("#post-description").val()}}
-//   $.ajax({
-//     url: "https://birdeck.herokuapp.com/api/v1/posts.json",
-//     method: "POST",
-//     dataType: "json",
-//     data: postParams,
-//     success: successfulPosts,
-//   })
-// }
-
-// photographs.forEach(function(simplePhoto) {
-//   var image = document.createElement('img');
-//   image.alt = simplePhoto.caption;
-//   image.src = simplePhoto.url;
-//   image.className = "instagram-image";
-//   document.getElementById('photographs').appendChild(image)
-// });
+function showIdeas(results) {
+  results.forEach(function(idea){
+    $(".whole-idea").prepend(
+      "<div class='idea' data-idea-id="
+      + idea.id
+      + "><h3>Title:"
+      + idea.title
+      + "</h3><p>"
+      + idea.body
+      + "</p><h4>"
+      + idea.quality
+      + "</h4>"
+      + "</div>"
+    )
+  })
+}
