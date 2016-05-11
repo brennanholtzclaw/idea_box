@@ -90,17 +90,14 @@ function editIdea(){
 };
 
 function deleteIdea(){
-// console.warn("Get Here");
   event.preventDefault();
-// debugger;
   var ideaId = this.parentElement.getAttribute("data-idea-id")
-  // var ideaParams = {idea: {title: $("#idea-title").val(), body: $("#idea-body").val()}}
   $.ajax({
     url: "api/v1/ideas/" + ideaId,
     method: "DELETE",
-    dataType: "json",
-    // data: ideaParams,
-    success: fetchIdeas,
+    success: function(){
+      $(".idea[data-idea-id=" + ideaId + "]").remove()
+    },
     error: function(){
       alert("Something went wrong")
     }
