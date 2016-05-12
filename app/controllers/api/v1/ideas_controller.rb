@@ -2,7 +2,7 @@ class Api::V1::IdeasController < ApiController
   respond_to :json
 
   def index
-    respond_with Idea.all
+    respond_with Idea.newest_first
   end
 
   def show

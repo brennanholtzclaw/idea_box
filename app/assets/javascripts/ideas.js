@@ -40,11 +40,11 @@ function ideaDiv(idea) {
   + "'><hr><h3 class='displayed-idea-title idea' id='idea-title-"
   + idea.id
   + "' contentEditable='true'>"
-  + idea.title
+  + truncate(idea.title)
   + "</h3><p class='displayed-idea-body id='idea-body-"
   + idea.id
   + "' contentEditable='true'>"
-  + idea.body
+  + truncate(idea.body)
   + "</p><h4>Quality: "
   + idea.quality
   + "</h4>"
@@ -52,4 +52,8 @@ function ideaDiv(idea) {
   + "<input type='button' value='Thumbs Up' class='btn btn-success' id='thumbs-up'>  "
   + "<input type='button' value='Thumbs Down' class='btn btn-warning' id='thumbs-down'>  "
   + "</div>"
+};
+
+var truncate = function(ideaText) {
+  return ideaText.length > 100 ? ideaText.substr(0, ideaText.lastIndexOf(' ', 100)) + '...' : ideaText;
 };

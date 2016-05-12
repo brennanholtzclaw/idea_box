@@ -6,6 +6,7 @@ function editBody(){
     url: "api/v1/ideas/" + ideaId,
     method: "PUT",
     dataType: "json",
+    success: fetchIdeas,
     data: ideaParams,
     error: function(){
       alert("Something went wrong")
@@ -21,6 +22,7 @@ function editTitle(){
     url: "api/v1/ideas/" + ideaId,
     method: "PUT",
     dataType: "json",
+    success: fetchIdeas,
     data: ideaParams,
     error: function(){
       alert("Something went wrong")
