@@ -15,18 +15,6 @@ $(document).ready(function(){
   // });
 })
 
-function filterIdeas() {
-  var currentName = this.value;
-  var ideaTitles = $('.displayed-idea-title');
-  ideaTitles.each(function(index, idea){
-    if ($(idea).text().indexOf(currentName) !== -1) {
-      $(idea.parentElement).show();
-    } else {
-      $(idea.parentElement).hide();
-    }
-  })
-}
-
 function fetchIdeas(event) {
   $.ajax({
     url: "api/v1/ideas",
@@ -37,22 +25,6 @@ function fetchIdeas(event) {
       alert("Something went wrong")
     }
   })
-}
-
-function createIdea() {
-  var ideaParams = {idea: {title: $("#idea-title").val(), body: $("#idea-body").val()}}
-  $.ajax({
-    url: "api/v1/ideas",
-    method: "POST",
-    dataType: "json",
-    data: ideaParams,
-    success: prependIdea,
-    error: function(){
-      alert("Something went wrong")
-    }
-  })
-  $("#idea-title").val("")
-  $("#idea-body").val("")
 }
 
 function prependIdea(idea) {
@@ -105,110 +77,3 @@ function showIdeas(results) {
     )
   })
 }
-
-function thumbsUp() {
-  event.preventDefault();
-  var ideaId = this.parentElement.getAttribute("data-idea-id")
-  if ($(this.parentElement).data("quality") === "terrible") {
-    var ideaParams = {idea: {quality: "plausible"}}
-    $.ajax({
-      url: "api/v1/ideas/" + ideaId,
-      method: "PUT",
-      dataType: "json",
-      data: ideaParams,
-      success: fetchIdeas,
-      error: function(){
-        alert("Something went wrong")
-      }
-    })
-  }
-  else if ($(this.parentElement).data("quality") === "plausible") {
-    var ideaParams = {idea: {quality: "great"}}
-    $.ajax({
-      url: "api/v1/ideas/" + ideaId,
-      method: "PUT",
-      dataType: "json",
-      data: ideaParams,
-      success: fetchIdeas,
-      error: function(){
-        alert("Something went wrong")
-      }
-    })
-  }
-};
-
-function thumbsDown() {
-  event.preventDefault();
-  var ideaId = this.parentElement.getAttribute("data-idea-id")
-  if ($(this.parentElement).data("quality") === "great") {
-    var ideaParams = {idea: {quality: "plausible"}}
-    $.ajax({
-      url: "api/v1/ideas/" + ideaId,
-      method: "PUT",
-      dataType: "json",
-      data: ideaParams,
-      success: fetchIdeas,
-      error: function(){
-        alert("Something went wrong")
-      }
-    })
-  }
-  else if ($(this.parentElement).data("quality") === "plausible") {
-    var ideaParams = {idea: {quality: "terrible"}}
-    $.ajax({
-      url: "api/v1/ideas/" + ideaId,
-      method: "PUT",
-      dataType: "json",
-      data: ideaParams,
-      success: fetchIdeas,
-      error: function(){
-        alert("Something went wrong")
-      }
-    })
-  }
-};
-
-function editBody(){
-  event.preventDefault();
-  var ideaId = this.parentElement.getAttribute("data-idea-id")
-  var ideaParams = {idea: {body: $(this).text()}}
-  $.ajax({
-    url: "api/v1/ideas/" + ideaId,
-    method: "PUT",
-    dataType: "json",
-    data: ideaParams,
-    error: function(){
-      alert("Something went wrong")
-    }
-  })
-};
-
-function editTitle(){
-  event.preventDefault();
-  var ideaId = this.parentElement.getAttribute("data-idea-id")
-  var ideaParams = {idea: {title: $(this).text()}}
-  $.ajax({
-    url: "api/v1/ideas/" + ideaId,
-    method: "PUT",
-    dataType: "json",
-    data: ideaParams,
-    error: function(){
-      alert("Something went wrong")
-    }
-  })
-};
-
-function deleteIdea(){
-  event.preventDefault();
-  var ideaId = this.parentElement.getAttribute("data-idea-id")
-  $.ajax({
-    url: "api/v1/ideas/" + ideaId,
-    method: "DELETE",
-    success: function(){
-      $(".idea[data-idea-id=" + ideaId + "]").remove()
-    },
-    error: function(){
-      alert("Something went wrong")
-    }
-  })
-};
