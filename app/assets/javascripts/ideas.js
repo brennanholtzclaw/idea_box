@@ -31,7 +31,7 @@ function showIdeas(results) {
 }
 
 function prependIdea(idea) {
-  $wholeIdea.prepend(ideaDiv(idea));
+  $('.whole-idea').prepend(ideaDiv(idea));
 }
 
 function ideaDiv(idea) {
