@@ -1,13 +1,16 @@
 $(document).ready(function(){
+  var $body = $('body');
   window.onload = fetchIdeas;
   $("#create-idea").on("click", createIdea);
   $("#idea_filter_name").on("keyup", filterIdeas);
-  $('body').on("click", "input#delete-idea", deleteIdea);
-  $('body').on("click", "input#thumbs-up", thumbsUp);
-  $('body').on("click", "input#thumbs-down", thumbsDown);
-  $('body').on("blur", "h3.displayed-idea-title", editTitle);
-  $('body').on("blur", "p.displayed-idea-body", editBody);
+  $body.on("click", "input#delete-idea", deleteIdea);
+  $body.on("click", "input#thumbs-up", thumbsUp);
+  $body.on("click", "input#thumbs-down", thumbsDown);
+  $body.on("blur", "h3.displayed-idea-title", editTitle);
+  $body.on("blur", "p.displayed-idea-body", editBody);
 });
+
+var $wholeIdea = $('.whole-idea');
 
 function fetchIdeas(event) {
   $.ajax({
@@ -22,14 +25,14 @@ function fetchIdeas(event) {
 }
 
 function showIdeas(results) {
-  $(".whole-idea").html("");
+  $('.whole-idea').html("");
   results.forEach(function(idea){
-    $(".whole-idea").prepend(ideaDiv(idea));
+    $('.whole-idea').prepend(ideaDiv(idea));
   });
 }
 
 function prependIdea(idea) {
-  $(".whole-idea").prepend(ideaDiv(idea));
+  $('.whole-idea').prepend(ideaDiv(idea));
 }
 
 function ideaDiv(idea) {
