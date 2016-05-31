@@ -1,13 +1,13 @@
 $(document).ready(function(){
-  window.onload = fetchIdeas
+  window.onload = fetchIdeas;
   $("#create-idea").on("click", createIdea);
-  $("#idea_filter_name").on("keyup", filterIdeas)
+  $("#idea_filter_name").on("keyup", filterIdeas);
   $('body').on("click", "input#delete-idea", deleteIdea);
   $('body').on("click", "input#thumbs-up", thumbsUp);
   $('body').on("click", "input#thumbs-down", thumbsDown);
   $('body').on("blur", "h3.displayed-idea-title", editTitle);
   $('body').on("blur", "p.displayed-idea-body", editBody);
-})
+});
 
 function fetchIdeas(event) {
   $.ajax({
@@ -16,20 +16,20 @@ function fetchIdeas(event) {
     dataType: "json",
     success: showIdeas,
     error: function(){
-      alert("Something went wrong")
+      alert("Something went wrong");
     }
-  })
+  });
 }
 
 function showIdeas(results) {
-  $(".whole-idea").html("")
+  $(".whole-idea").html("");
   results.forEach(function(idea){
-    $(".whole-idea").prepend(ideaDiv(idea))
-  })
+    $(".whole-idea").prepend(ideaDiv(idea));
+  });
 }
 
 function prependIdea(idea) {
-  $(".whole-idea").prepend(ideaDiv(idea))
+  $(".whole-idea").prepend(ideaDiv(idea));
 }
 
 function ideaDiv(idea) {
