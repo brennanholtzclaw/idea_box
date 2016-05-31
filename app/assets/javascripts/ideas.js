@@ -10,8 +10,6 @@ $(document).ready(function(){
   $body.on("blur", "p.displayed-idea-body", editBody);
 });
 
-var $wholeIdea = $('.whole-idea');
-
 function fetchIdeas(event) {
   $.ajax({
     url: "api/v1/ideas",
@@ -25,14 +23,15 @@ function fetchIdeas(event) {
 }
 
 function showIdeas(results) {
-  $('.whole-idea').html("");
+  var $wholeIdea = $('.whole-idea');
+  $wholeIdea.html("");
   results.forEach(function(idea){
-    $('.whole-idea').prepend(ideaDiv(idea));
+    $wholeIdea.prepend(ideaDiv(idea));
   });
 }
 
 function prependIdea(idea) {
-  $('.whole-idea').prepend(ideaDiv(idea));
+  $wholeIdea.prepend(ideaDiv(idea));
 }
 
 function ideaDiv(idea) {
