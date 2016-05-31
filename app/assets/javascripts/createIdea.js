@@ -7,9 +7,9 @@ function createIdea() {
     data: ideaParams,
     success: prependIdea,
     error: function(){
-      alert("Something went wrong")
+      alert("Something went wrong");
     }
-  })
-  $("#idea-title").val("")
-  $("#idea-body").val("")
+  });
+  $("#idea-title").val("");
+  $("#idea-body").val("");
 }

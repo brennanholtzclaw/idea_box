@@ -1,7 +1,7 @@
 function editBody(){
   event.preventDefault();
-  var ideaId = this.parentElement.getAttribute("data-idea-id")
-  var ideaParams = {idea: {body: $(this).text()}}
+  var ideaId = this.parentElement.getAttribute("data-idea-id");
+  var ideaParams = {idea: {body: $(this).text()}};
   $.ajax({
     url: "api/v1/ideas/" + ideaId,
     method: "PUT",
@@ -9,15 +9,15 @@ function editBody(){
     success: fetchIdeas,
     data: ideaParams,
     error: function(){
-      alert("Something went wrong")
+      alert("Something went wrong");
     }
-  })
-};
+  });
+}
 
 function editTitle(){
   event.preventDefault();
-  var ideaId = this.parentElement.getAttribute("data-idea-id")
-  var ideaParams = {idea: {title: $(this).text()}}
+  var ideaId = this.parentElement.getAttribute("data-idea-id");
+  var ideaParams = {idea: {title: $(this).text()}};
   $.ajax({
     url: "api/v1/ideas/" + ideaId,
     method: "PUT",
@@ -25,7 +25,7 @@ function editTitle(){
     success: fetchIdeas,
     data: ideaParams,
     error: function(){
-      alert("Something went wrong")
+      alert("Something went wrong");
     }
-  })
-};
+  });
+}
