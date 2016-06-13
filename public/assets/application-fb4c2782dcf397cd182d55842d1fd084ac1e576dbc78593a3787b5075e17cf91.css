@@ -8813,6 +8813,6 @@ body {
 }
 
 /* line 6, /Users/brennanholtzclaw/turing/4module/idea_box/app/assets/stylesheets/custom.scss */
-#heading h1, h2 {
+#heading h1, h2, h3 {
   display: inline;
 }

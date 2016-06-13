@@ -7,5 +7,5 @@ function filterIdeas() {
     } else {
       $(idea.parentElement).hide();
     }
-  })
+  });
 }
